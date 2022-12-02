@@ -1,0 +1,29 @@
+#docker-compose.yml
+version: '3.3'
+
+services:
+    voteapp-api:
+        build: .
+        container_name: VoteWebAPI
+        ports:
+        - 8000:80
+
+    voteapp-db:
+        image: mysql:5.7
+        container_name: voter-db
+        environment:
+            - MYSQL_USER=swag
+            - MYSQL_PASSWORD=AppelCake69
+            - MYSQL_ROOT_PASSWORD=AppelCake69
+            - MYSQL_DATABASE=VoteDB
+        volumes:
+            - ./mysqldata:/var/lib/mysql
+        ports:
+        - 3306:3306
+        expose:
+        - 3306
+            
+            
+volumes:
+    mysqldata: 
+    
