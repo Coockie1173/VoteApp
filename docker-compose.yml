@@ -11,7 +11,7 @@ services:
             - voteland
 
     voteapp-db:
-        image: mysql:5.7
+        image: mysql
         container_name: voter-db
         environment:
             - MYSQL_USER=swag

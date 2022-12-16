@@ -11,7 +11,7 @@
             Loaded="VerticalStackLayout_Loaded">
 
             <Button Text="View open Questions" Clicked="Button_Clicked"/>
-            <Button Text="View previous Questions"/>
+            <Button Text="View previous Questions" Clicked="Button_Clicked_1"/>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,16 @@ namespace VoteWebAPI.Controllers
         [HttpPost("AnswerQuestion/{UID}/{QuestionID}/{AnswerNumber}")]
         public void AnswerQuestion(string UID, int QuestionID, int AnswerNumber)
         {
+            Console.WriteLine($"{UID} answered {QuestionID} with {AnswerNumber}");
+            Connectionhandler.GetInstance().AnswerQuestion(UID, QuestionID, AnswerNumber);
+        }
 
+        [HttpGet("GetAnswered")]
+        public string GetAnswered()
+        {
+            Console.WriteLine($"Getting all answered questions");
+            AnsweredQuestion AQ = Connectionhandler.GetInstance().GetAnswered();
+            return JsonConvert.SerializeObject(AQ);
         }
     }
 }

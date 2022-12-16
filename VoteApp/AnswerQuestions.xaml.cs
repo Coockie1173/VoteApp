@@ -19,7 +19,7 @@ public partial class AnswerQuestions : ContentPage
 
         string url = GlobalData.URI + "/QuestionController/GetUnanswered/" + GlobalData.MyID;
 
-        WebClient client = new WebClient(); //no async, async bad
+        WebClient client = new WebClient(); //can't use async here :/
 
         // Send a GET request to the specified URL and store the response
         string responseBody = client.DownloadString(url);
@@ -35,7 +35,7 @@ public partial class AnswerQuestions : ContentPage
         }
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
         Button b = (Button)sender;
         Question Q = (Question)b.BindingContext;
@@ -43,6 +43,22 @@ public partial class AnswerQuestions : ContentPage
         {
             QuestionDict.Remove(Q.questionid);
             questions.Remove(Q);
+
+            using (HttpClient wc = new HttpClient())
+            {
+                var Parameters = new Dictionary<string, string> { { "UID", GlobalData.MyID }, { "QuestionID", Q.questionid.ToString() }, { "AnswerNumber", Q.SelectedOptions.ToString() } };
+                var encodedContent = new FormUrlEncodedContent(Parameters);
+
+                string url = GlobalData.URI + "/QuestionController/AnswerQuestion/" + GlobalData.MyID + "/" + Q.questionid + "/" + Q.SelectedOptions;
+
+                var response = await wc.PostAsync(url, encodedContent);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    // Do something with response. Example get content:
+                    // var responseContent = await response.Content.ReadAsStringAsync ().ConfigureAwait (false);
+                    Environment.Exit(-1);
+                }
+            }
         }
     }
 

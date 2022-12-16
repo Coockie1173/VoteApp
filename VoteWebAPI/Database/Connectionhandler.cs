@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 using MySqlConnector;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using VoteWebAPI.Controllers;
@@ -60,6 +61,46 @@ namespace VoteWebAPI.Database
             }
         }
 
+        public void AnswerQuestion(string UID, int QuestionID, int AnswerNumber)
+        {
+            MySqlConnection cnn;
+            cnn = new MySqlConnection(ConnectionString);
+
+            try
+            {
+                cnn.Open();
+
+                MySqlCommand command = new MySqlCommand($"INSERT IGNORE INTO AnsweredQuestions (QuestionID, UserID, SelectedAnswer) VALUES (@QUID, (select UserID from Users where DeviceID = @UID), @ANN)", cnn);
+                command.Parameters.AddWithValue("@QUID", QuestionID);
+                command.Parameters.AddWithValue("@UID", UID);
+                command.Parameters.AddWithValue("@ANN", AnswerNumber);
+                command.ExecuteNonQuery();
+
+                command.Dispose();
+            }
+            catch (MySqlException ex)
+            {
+                switch (ex.Number)
+                {
+                    case 0:
+                        Console.WriteLine("Cannot connect to server.  Contact administrator");
+                        break;
+
+                    case 1045:
+                        Console.WriteLine("Invalid username/password, please try again");
+                        break;
+                    default:
+                        Console.WriteLine(ex.Message);
+                        break;
+                }
+            }
+            finally
+            {
+                cnn.Close();
+                cnn.Dispose();
+            }
+        }
+
         public Question[] GetUnansweredQuestionsByUID(string UID)
         {
             MySqlConnection cnn;
@@ -101,6 +142,63 @@ namespace VoteWebAPI.Database
             }
 
             return Q.ToArray();
+        }
+
+        public AnsweredQuestion GetAnswered()
+        {
+            MySqlConnection cnn;
+            cnn = new MySqlConnection(ConnectionString);
+
+            cnn.Open();
+
+            Dictionary<string, Dictionary<int, int>> QA = new Dictionary<string, Dictionary<int, int>>(); // Question - AnswerNo - Amount
+            Dictionary<string, string[]> Options = new Dictionary<string, string[]>(); //Question - Options
+
+            try
+            {
+                MySqlCommand command = new MySqlCommand("SELECT * FROM AnsweredQuestions inner join Questions on Questions.QuestionID = AnsweredQuestions.QuestionID", cnn);
+
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string QID = reader.GetString("Question");
+                    if(!QA.ContainsKey(QID))
+                    {
+                        QA.Add(QID, new Dictionary<int, int>());
+                    }
+
+                    int AnswID = reader.GetInt32("SelectedAnswer");
+                    if (!QA[QID].ContainsKey(AnswID))
+                    {
+                        QA[QID].Add(AnswID, 1);
+                    }
+                    else
+                    {
+                        QA[QID][AnswID] += 1;
+                    }
+
+                    if(!Options.ContainsKey(QID))
+                    {
+                        Options.Add(QID, reader.GetString("Options").Split('|'));
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                cnn.Close();
+                cnn.Dispose();
+            }
+
+            AnsweredQuestion AQ = new AnsweredQuestion();
+            AQ.Options = Options;
+            AQ.QA = QA;
+
+            return AQ;
         }
 
         ~Connectionhandler()
