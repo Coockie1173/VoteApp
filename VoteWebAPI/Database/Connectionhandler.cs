@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.PortableExecutable;
 using MySqlConnector;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -144,15 +145,15 @@ namespace VoteWebAPI.Database
             return Q.ToArray();
         }
 
-        public AnsweredQuestion GetAnswered()
+        public AnsweredQuestion[] GetAnswered()
         {
             MySqlConnection cnn;
             cnn = new MySqlConnection(ConnectionString);
 
             cnn.Open();
 
-            Dictionary<string, Dictionary<int, int>> QA = new Dictionary<string, Dictionary<int, int>>(); // Question - AnswerNo - Amount
-            Dictionary<string, string[]> Options = new Dictionary<string, string[]>(); //Question - Options
+            Dictionary<string, AnsweredQuestion> QA = new Dictionary<string, AnsweredQuestion>(); // Question - AnswerNo - Amount
+            //Dictionary<string, string[]> Options = new Dictionary<string, string[]>(); //Question - Options
 
             try
             {
@@ -165,23 +166,25 @@ namespace VoteWebAPI.Database
                     string QID = reader.GetString("Question");
                     if(!QA.ContainsKey(QID))
                     {
-                        QA.Add(QID, new Dictionary<int, int>());
+                        QA.Add(QID, new AnsweredQuestion());
                     }
 
                     int AnswID = reader.GetInt32("SelectedAnswer");
-                    if (!QA[QID].ContainsKey(AnswID))
+                    if (!QA[QID].QA.ContainsKey(AnswID))
                     {
-                        QA[QID].Add(AnswID, 1);
+                        QA[QID].QA.Add(AnswID, 1);
                     }
                     else
                     {
-                        QA[QID][AnswID] += 1;
+                        QA[QID].QA[AnswID] += 1;
                     }
 
-                    if(!Options.ContainsKey(QID))
+                    if(QA[QID].Options.Length == 0)
                     {
-                        Options.Add(QID, reader.GetString("Options").Split('|'));
+                        QA[QID].Options = reader.GetString("Options").Split('|');
                     }
+
+                    QA[QID].Question = QID;
                 }
             }
             catch (MySqlException ex)
@@ -194,11 +197,7 @@ namespace VoteWebAPI.Database
                 cnn.Dispose();
             }
 
-            AnsweredQuestion AQ = new AnsweredQuestion();
-            AQ.Options = Options;
-            AQ.QA = QA;
-
-            return AQ;
+            return QA.Values.ToArray();
         }
 
         ~Connectionhandler()

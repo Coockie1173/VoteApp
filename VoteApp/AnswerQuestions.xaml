@@ -9,11 +9,11 @@
                 <DataTemplate>
                     <ViewCell>
                         <Border Stroke="#FFFFFF" StrokeThickness="2">
-                            <HorizontalStackLayout Margin="20" Spacing="15">
-                                <Label Text="{Binding _question}" VerticalTextAlignment="Center"/>
-                                <Picker SelectedIndexChanged="AnswerPicker_SelectedIndexChanged" Title="Select an answer" ItemsSource="{Binding options}"></Picker>
-                                <Button Text="Submit" Clicked="Button_Clicked"></Button>
-                            </HorizontalStackLayout>
+                            <Grid ColumnDefinitions="auto,*,auto">
+                                <Label Text="{Binding _question}" VerticalTextAlignment="Center" Grid.Column="0" Margin="5,5,5,5"/>
+                                <Picker SelectedIndexChanged="AnswerPicker_SelectedIndexChanged" Grid.Column="1" Margin="5,5,5,5" Title="Select an answer" ItemsSource="{Binding options}"/>
+                                <Button Text="Submit" Clicked="Button_Clicked" Grid.Column="2" Margin="5,5,5,5"/>
+                            </Grid>
                         </Border>
                     </ViewCell>
                 </DataTemplate>
