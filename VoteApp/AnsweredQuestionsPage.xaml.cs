@@ -1,4 +1,3 @@
-using Microsoft.UI.Xaml;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -85,23 +84,6 @@ public partial class AnsweredQuestionsPage : ContentPage
 
 
             row++;
-        }
-    }
-
-    //https://stackoverflow.com/questions/3066247/how-can-i-get-the-xname-of-an-object-from-code
-    public static string GetName(object obj)
-    {
-        // First see if it is a FrameworkElement
-        var element = obj as FrameworkElement;
-        if (element != null)
-            return element.Name;
-        // If not, try reflection to get the value of a Name property.
-        try { return (string)obj.GetType().GetProperty("Name").GetValue(obj, null); }
-        catch
-        {
-            // Last of all, try reflection to get the value of a Name field.
-            try { return (string)obj.GetType().GetField("Name").GetValue(obj); }
-            catch { return null; }
         }
     }
 }
