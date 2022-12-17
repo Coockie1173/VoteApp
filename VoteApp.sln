@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteApp", "VoteApp\VoteApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteWebAPI", "VoteWebAPI\VoteWebAPI.csproj", "{5B8AB85E-9E58-4FD2-AFCB-4A5EDF335A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITester", "APITester\APITester.csproj", "{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiTester", "APITester\MauiTester.csproj", "{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
