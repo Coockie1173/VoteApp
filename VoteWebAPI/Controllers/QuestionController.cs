@@ -42,7 +42,7 @@ namespace VoteWebAPI.Controllers
         public string GetAnswered()
         {
             Console.WriteLine($"Getting all answered questions");
-            AnsweredQuestion AQ = Connectionhandler.GetInstance().GetAnswered();
+            AnsweredQuestion[] AQ = Connectionhandler.GetInstance().GetAnswered();
             return JsonConvert.SerializeObject(AQ);
         }
     }
