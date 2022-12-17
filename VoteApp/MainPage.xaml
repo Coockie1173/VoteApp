@@ -10,8 +10,10 @@
             VerticalOptions="Center"
             Loaded="VerticalStackLayout_Loaded">
 
-            <Button Text="View open Questions" Clicked="Button_Clicked"/>
-            <Button Text="View previous Questions" Clicked="Button_Clicked_1"/>
+            <Image Source="voter.png" VerticalOptions="Start"/>
+
+            <Button Text="View open Questions" Clicked="Button_Clicked" VerticalOptions="End"/>
+            <Button Text="View previous Questions" Clicked="Button_Clicked_1" VerticalOptions="End"/>
 
         </VerticalStackLayout>
     </ScrollView>
