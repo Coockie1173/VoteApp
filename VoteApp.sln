@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteApp", "VoteApp\VoteApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteWebAPI", "VoteWebAPI\VoteWebAPI.csproj", "{5B8AB85E-9E58-4FD2-AFCB-4A5EDF335A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiTester", "APITester\MauiTester.csproj", "{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUITester", "MAUITester\MAUITester.csproj", "{266E686D-0FE2-417E-B05E-2AFB96A7D14C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,10 @@ Global
 		{5B8AB85E-9E58-4FD2-AFCB-4A5EDF335A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B8AB85E-9E58-4FD2-AFCB-4A5EDF335A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B8AB85E-9E58-4FD2-AFCB-4A5EDF335A6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCE28B48-8B98-4144-B876-AB5C6DCFAEC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266E686D-0FE2-417E-B05E-2AFB96A7D14C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266E686D-0FE2-417E-B05E-2AFB96A7D14C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266E686D-0FE2-417E-B05E-2AFB96A7D14C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266E686D-0FE2-417E-B05E-2AFB96A7D14C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

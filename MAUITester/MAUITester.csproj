@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VoteWebAPI\VoteWebAPI.csproj" />
+    <ProjectReference Include="..\VoteApp\VoteApp.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
-namespace APITester
+namespace MAUITester
 {
-    //testing is super jank :/
     public class UnitTest1
     {
         [Fact]
