@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteApp", "VoteApp\VoteApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoteWebAPI", "VoteWebAPI\VoteWebAPI.csproj", "{5B8AB85E-9E58-4FD2-AFCB-4A5EDF335A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUITester", "MAUITester\MAUITester.csproj", "{266E686D-0FE2-417E-B05E-2AFB96A7D14C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAUITester", "MAUITester\MAUITester.csproj", "{266E686D-0FE2-417E-B05E-2AFB96A7D14C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26F3E434-6CE8-453B-AFD4-FC5D383F6A21}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
