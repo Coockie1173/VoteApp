@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VoteApp
 {
-    internal class Question
+    public class Question
     {
         public int questionid { get; set; }
 
